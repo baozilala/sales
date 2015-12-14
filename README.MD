@@ -1,7 +1,9 @@
 <h2>Customer Orders Manage System 订单管理系统</h2>
 <h4>设置使用：</h4>
 <pre>
-  查看 connect.php 中的数据库设置，按照自己的配置来设置数据库。
+
+  查看 DEFAULT.connect.php 中的数据库设置，
+  然后将DEFAULT.connect.php重命名为：connect.php 按照自己的配置来设置数据库。
   然后将下列代码导入：
 Customers表格（不包含本行）：
   CREATE TABLE `customers` (
@@ -46,6 +48,8 @@ Orders表格（不包含本行）：
 
 <h4>更新日志：</h4>
 <pre>
+  9.
+    重新打包上传，Ignore 设置文件connet.php，添加了 DEFAULT.connect.php 到 github。
   8.
     Mysql 数据库添加了 Cashback 和 CashBackMoney。
     添加了 customer_sales_status.php 中的 利润，更精准的计算每笔单子的价格。包含 返现的计算，都会加入到 利润中。
