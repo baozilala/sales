@@ -49,7 +49,7 @@ Orders表格（不包含本行）：
 <h4>更新日志：</h4>
 <pre>
   9.
-    重新打包上传，Ignore 设置文件connet.php，添加了 DEFAULT.connect.php 到 github。
+    重新打包上传，Ignore 设置文件connect.php，添加了 DEFAULT.connect.php 到 github。
   8.
     Mysql 数据库添加了 Cashback 和 CashBackMoney。
     添加了 customer_sales_status.php 中的 利润，更精准的计算每笔单子的价格。包含 返现的计算，都会加入到 利润中。
