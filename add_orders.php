@@ -2,6 +2,63 @@
 include "header.php";
 include "navigation.php";
 include "connect.php";
+if (!empty($_POST)) {
+  $sql="INSERT INTO
+        orders (
+          Name,
+          OrderNumber,
+          OrderSite,
+          OrderSiteUrl,
+          ProductName,
+          Price,
+          PackageReturn,
+          BuyingPrice,
+          BuyingDate,
+          Unit,
+          ShipStatus,
+          Bank,
+          BankStatus,
+          CashBack
+        )
+        VALUES(
+          '$_POST[Name]',
+          '$_POST[OrderNumber]',
+          '$_POST[OrderSite]',
+          '$_POST[OrderSiteUrl]',
+          '$_POST[ProductName]',
+          '$_POST[Price]',
+          '$_POST[PackageReturn]',
+          '$_POST[BuyingPrice]',
+          '$_POST[BuyingDate]',
+          '$_POST[Unit]',
+          '$_POST[ShipStatus]',
+          '$_POST[Bank]',
+          '$_POST[BankStatus]',
+          '$_POST[CashBack]'
+        )";
+
+  if (mysql_query($sql,$con)) {
+    echo "
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class='alert alert-success' role='alert'>添加成功</div>
+        </div>
+      </div>
+    </div>
+    ";
+  }else{
+    echo "
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class='alert alert-danger' role='alert'>添加失败</div>".mysql_error()."
+        </div>
+      </div>
+    </div>
+    ";
+  }
+}
 ?>
     <header class="title page-header text-center">
       <h1>Order Record</h1>
@@ -9,7 +66,7 @@ include "connect.php";
     <div class="row">
 
       <div class="col-md-2 col-md-offset-5">
-        <form class="text-center" action="submit.php" method="post">
+        <form class="text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
           <!-- <input type="text" name="Name" placeholder="姓名" value=""> -->
           <div class="form-group">
             <i class="fa fa-user"></i> <label>姓名：</label>
@@ -72,30 +129,9 @@ include "connect.php";
           <div class="form-group">
             <i class="fa fa-truck"></i> <label>商家发货：</label>
             <select class="form-control" name="ShipStatus">
-              <option value="未发货">未发货</option>
-              <option value="准备发货">准备发货</option>
-              <option value="已发货">已发货</option>
-              <option value="已收货">已收货</option>
+              <option value="等待收货">等待收货</option>
+              <option value="收到货物">收到货物</option>
             </select>
-          </div>
-
-          <div class="form-group">
-            <i class="fa fa-truck"></i> <label>邮回中国：</label>
-            <select class="form-control" name="ShipChina">
-              <option value="未发货">未发货</option>
-              <option value="准备发货">准备发货</option>
-              <option value="已发货">已发货</option>
-              <option value="已收货">已收货</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <i class="fa fa-balance-scale"></i> <label>邮寄重量：</label>
-            <input type="number" class="form-control" name="ShipWeight" placeholder="邮寄重量">
-          </div>
-
-          <div class="form-group">
-            <i class="fa fa-dollar"></i> <label>邮寄价格：</label>
-            <input type="number" class="form-control" name="ShipPrice" placeholder="邮寄价格">
           </div>
 
           <div class="form-group">

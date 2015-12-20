@@ -2,6 +2,48 @@
 include "header.php";
 include "navigation.php";
 include "connect.php";
+if (!empty($_POST)) {
+  $sql="INSERT INTO customers
+        (
+          Name,
+          Alias,
+          Phone,
+          Address,
+          Zip,
+          Chineseid
+        )
+          VALUES(
+            '$_POST[name]',
+            '$_POST[alias]',
+            '$_POST[phone]',
+            '$_POST[address]',
+            '$_POST[zip]',
+            '$_POST[chineseid]'
+          )";
+
+        if (mysql_query($sql,$con)) {
+          echo "
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-12'>
+                <div class='alert alert-success' role='alert'>成功写入数据！</div>
+              </div>
+            </div>
+          </div>
+          ";
+        }else{
+          echo "
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-12'>
+                <div class='alert alert-danger' role='alert'>写入失败</div>
+                ".mysql_error()."
+              </div>
+            </div>
+          </div>
+          ";
+        }
+}
 ?>
 
 <header class="title page-header text-center">
@@ -11,7 +53,7 @@ include "connect.php";
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <form class="" action="submit_customers.php" method="post">
+      <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <div class="form-group">
           <i class="fa fa-user"></i> <label>姓名：</label>
           <input class="form-control" type="text" name="name">

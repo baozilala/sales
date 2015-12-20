@@ -4,50 +4,16 @@
 
   查看 DEFAULT.connect.php 中的数据库设置，
   然后将DEFAULT.connect.php重命名为：connect.php 按照自己的配置来设置数据库。
-  然后将下列代码导入：
-Customers表格（不包含本行）：
-  CREATE TABLE `customers` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `Name` char(50) DEFAULT NULL,
-    `Alias` char(50) DEFAULT NULL,
-    `Phone` char(11) DEFAULT NULL,
-    `Address` varchar(255) DEFAULT NULL,
-    `Zip` char(6) DEFAULT NULL,
-    `Chineseid` char(18) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-
-Orders表格（不包含本行）：
-  CREATE TABLE `orders` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `Name` char(6) NOT NULL DEFAULT '',
-    `OrderNumber` char(50) DEFAULT NULL,
-    `OrderSite` char(100) NOT NULL,
-    `OrderSiteUrl` varchar(255) NOT NULL DEFAULT '',
-    `ProductName` varchar(255) NOT NULL DEFAULT '',
-    `Price` float NOT NULL,
-    `BuyingPrice` float NOT NULL,
-    `ShipStatus` char(50) NOT NULL,
-    `BuyingDate` char(50) NOT NULL DEFAULT '',
-    `Unit` int(11) NOT NULL,
-    `ShipChina` char(50) NOT NULL,
-    `ShipChinaDate` char(25) DEFAULT '',
-    `ShipChinaPackages` int(3) DEFAULT NULL,
-    `ShipWeight` float DEFAULT NULL,
-    `ShipPrice` float DEFAULT NULL,
-    `Bank` char(11) NOT NULL,
-    `BankStatus` char(50) NOT NULL,
-    `PackageReturn` tinyint(1) DEFAULT NULL,
-    `ReturnTracking` char(26) DEFAULT NULL,
-    `Notes` varchar(255) DEFAULT NULL,
-    `CashBack` float DEFAULT NULL,
-    `CashBackMoney` float DEFAULT NULL,
-    PRIMARY KEY (`id`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  然后将SQL_For_Database.txt 中的代码导入到数据库。
 </pre>
 
 <h4>更新日志：</h4>
 <pre>
+  10.
+    把所有的单独提交页面全部合并到提交当页。也就是把 add_orders 所需要提交的页面，写到同一页了。
+    添加了数据库 ship 表。
+    添加了 登记邮寄，邮寄跟踪表。原来是和查询订单显示在一起。分开的好处是更好的计算邮费，在一个是为了更方便的查询。
+    将SQL代码，放在SQL_For_Database.txt文档里了。这样首页能更详细的显示说明。
   9.
     重新打包上传，Ignore 设置文件connect.php，添加了 DEFAULT.connect.php 到 github。
   8.

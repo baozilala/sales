@@ -2,6 +2,50 @@
 include "header.php";
 include "navigation.php";
 include "connect.php";
+
+if (!empty($_POST['ReturnTracking'])) {
+  $upda="UPDATE orders SET ReturnTracking='$_POST[ReturnTracking]' WHERE id = $_POST[id]";
+  mysql_query($upda,$con);
+}
+if (!empty($_POST)) {
+  $sql = "UPDATE orders SET Name = '$_POST[Name]',
+    OrderNumber='$_POST[OrderNumber]',
+    OrderSite='$_POST[OrderSite]',
+    ProductName='$_POST[ProductName]',
+    Price='$_POST[Price]',
+    PackageReturn='$_POST[PackageReturn]',
+    BuyingPrice='$_POST[BuyingPrice]',
+    Unit='$_POST[Unit]',
+    ShipStatus='$_POST[ShipStatus]',
+    Bank='$_POST[Bank]',
+    BankStatus='$_POST[BankStatus]',
+    Notes='$_POST[Notes]',
+    CashBack='$_POST[CashBack]'
+    WHERE id = $_POST[id];";
+
+  if (mysql_query($sql,$con)) {
+    echo "
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class='alert alert-success' role='alert'>修改成功</div>
+        </div>
+      </div>
+    </div>
+    ";
+  }else{
+    echo "
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class='alert alert-danger' role='alert'>修改失败</div>
+          ".mysql_error()."
+        </div>
+      </div>
+    </div>
+    ";
+  }
+}
 ?>
 <header class="title page-header text-center">
   <h1>订单修改</h1>
@@ -11,7 +55,7 @@ include "connect.php";
     <?php
     $Order_List = mysql_query("SELECT * FROM orders WHERE id = $_GET[id]");
     ?>
-      <form class="" action="edit_submit.php" method="post">
+      <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
       <?php
         while($row = mysql_fetch_assoc($Order_List) ){
        ?>
@@ -52,27 +96,23 @@ include "connect.php";
             </div>
             <div class="form-group">
               <lable>商家发货：</lable>
-              <input class='form-control 'type="text" name="ShipStatus" value="<?php echo $row['ShipStatus'] ?>">
-            </div>
-            <div class="form-group">
-              <lable>邮回中国：</lable>
-              <input class='form-control' type="text" name="ShipChina" value="<?php echo $row['ShipChina'] ?>">
-            </div>
-            <div class="form-group">
-              <lable>邮寄日期：</lable>
-              <input class='form-control' type="date" name="ShipChinaDate" value="<?php echo $row['ShipChinaDate'] ?>">
-            </div>
-            <div class="form-group">
-              <lable>邮寄包裹数量：</lable>
-              <input class='form-control' type="number" name="ShipChinaPackages" value="<?php echo $row['ShipChinaPackages'] ?>">
-            </div>
-            <div class="form-group">
-              <lable>邮寄重量：</lable>
-              <input class='form-control' type="text" name="ShipWeight" value="<?php echo $row['ShipWeight'] ?>">
-            </div>
-            <div class="form-group">
-              <lable>邮寄价格：</lable>
-              <input class='form-control' type="text" name="ShipPrice" value="<?php echo $row['ShipPrice'] ?>">
+              <?php
+              if ($row['ShipStatus']=='等待收货') {
+                echo "
+                <select class='form-control' name='ShipStatus'>
+                  <option value='收到货物'>收到货物</option>
+                  <option value='等待收货'>等待收货</option>
+                </select>
+                ";
+              }elseif ($row['ShipStatus']=='收到货物') {
+                echo "
+                <select class='form-control' name='ShipStatus'>
+                  <option value='收到货物'>收到货物</option>
+                  <option value='等待收货'>等待收货</option>
+                </select>
+                ";
+              }
+               ?>
             </div>
             <div class="form-group">
               <lable>银行卡：</lable>

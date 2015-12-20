@@ -72,21 +72,6 @@ include "connect.php";
         </div>
 
         <div class="">
-          <i class="fa fa-truck"></i> <label>邮回中国：</label>
-          <?php echo $row['ShipChina'] ?>
-        </div>
-
-        <div class="">
-          <i class="fa fa-balance-scale"></i> <label>邮寄重量：</label>
-          <?php echo $row['ShipWeight'] . "lb~"?>
-        </div>
-
-        <div class="">
-          <i class="fa fa-dollar"></i> <label>邮寄价格：</label>
-          <?php echo "$" . $row['ShipPrice'] ?>
-        </div>
-
-        <div class="">
             <i class="fa fa-truck"></i> <label>是否退货：</label>
           <?php
         if ($row['PackageReturn'] == 0 or $row['PackageReturn'] == 'null' ) {

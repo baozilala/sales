@@ -28,10 +28,7 @@ include "connect.php";
            <th><i class="fa fa-calendar"></i></th>
             <th>数量：</th> -->
             <th><i class="fa fa-truck"></i></th>
-            <th><i class="fa fa-plane"></i></th>
-            <th>邮寄日期，数量</th>
             <th><i class="fa fa-balance-scale"></i>、<i class="fa fa-money"></i></th>
-            <th><i class="fa fa-cc-visa"></i>、<i class="fa fa-spinner"></i></th>
             <th><i class="fa fa-truck"></i></th>
             <th><i class="fa fa-gear"></i></th>
           </tr>
@@ -46,15 +43,6 @@ include "connect.php";
               <td><?php echo $row['Name'] ?></td>
               <td><?php echo $row['ProductName'] ?></td>
               <td><?php echo $row['ShipStatus'] ?></td>
-              <td><?php echo $row['ShipChina'];?></td>
-              <td><?php
-              if (!empty($row['ShipChinaDate'])) {
-              echo $row['ShipChinaDate']." & ".$row['ShipChinaPackages'];
-              }
-              ?></td>
-
-              <td><?php echo $row['ShipWeight'] . "lb~"?><?php echo "$" . $row['ShipPrice'] ?></td>
-
               <td><?php echo $row['Bank'] . "、" ?><?php echo $row['BankStatus'] ?></td>
               <td>
                 <?php
@@ -78,7 +66,7 @@ include "connect.php";
               <td>
                   <ul class="list-inline">
                     <li><a href="order_detail.php?id=<?php echo $row['id']?>" class="btn btn-primary btn-sm">详情<a></li>
-                    <li><a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-warning btn-sm">修改</a></li>
+                    <li><a href="edit_orders.php?id=<?php echo $row['id']?>" class="btn btn-warning btn-sm">修改</a></li>
                     <li><a href="del_order.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-xs">删除</a></li>
                   </ul>
               </td>
