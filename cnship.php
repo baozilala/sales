@@ -54,7 +54,7 @@ include "connect.php";
         <?php
 
         echo "<div class='text-center'>";
-          $count_result = mysql_query("SELECT count(*) as count FROM shi");
+          $count_result = mysql_query("SELECT count(*) as count FROM ship");
           $count_array = mysql_fetch_array($count_result);
           $pagenum=ceil($count_array['count']/$pagesize);
           echo "共",$count_array['count'],"条订单";
