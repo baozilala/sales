@@ -126,7 +126,7 @@ if (!empty($_POST)) {
             <input type="date" class="form-control" name="BuyingDate">
           </div>
 
-          <div class="form-group">
+          <div class="hidden">
             <i class="fa fa-truck"></i> <label>商家发货：</label>
             <select class="form-control" name="ShipStatus">
               <option value="等待收货">等待收货</option>
@@ -143,28 +143,25 @@ if (!empty($_POST)) {
               <option value="PNC">PNC</option>
             </select>
           </div>
-
-          <div class="form-group">
+          <div class="hidden">
             <i class="fa fa-spinner"></i> <label>银行状态：</label>
             <select class="form-control" name="BankStatus">
-              <option value="转账中">转账中</option>
-              <option value="已划走">已经划走</option>
-              <option value="等待退款">等待退款</option>
-              <option value="已退款">已退款</option>
+              <option value="0"></option>
+              <option value="1">已退款</option>
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="hidden">
             <i class="fa fa-truck"></i> <label>是否退货：</label>
             <select class="form-control" name="PackageReturn">
               <option value=""></option>
               <option value="0">不需退货</option>
-              <option value="1">需要退货</option>
-              <option value="2">已经退货</option>
+              <option value="1">已经退货</option>
             </select>
           </div>
+
           <div class="form-group">
-              <input type="submit" name="name" value="提交">
+              <input class="btn btn-default" type="submit" name="name" value="提交">
           </div>
         </form>
       </div>

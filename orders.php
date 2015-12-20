@@ -43,15 +43,25 @@ include "connect.php";
               <td><?php echo $row['Name'] ?></td>
               <td><?php echo $row['ProductName'] ?></td>
               <td><?php echo $row['ShipStatus'] ?></td>
-              <td><?php echo $row['Bank'] . "、" ?><?php echo $row['BankStatus'] ?></td>
+              <td><?php echo $row['Bank'] ?><?php
+                if ($row['PackageReturn'] == 1 && $row['BankStatus']==0) {
+                  echo "、等待退款";;
+                }elseif ($row['PackageReturn'] == 1 && $row['BankStatus']==1) {
+                  echo "、已退款";
+                }elseif ($row['BankStatus']==1 && $row['PackageReturn'] == 0 ) {
+                  echo "、<p class='text-danger'>您忘记选择已经退货</p>";
+                }elseif ($row['PackageReturn'] == 1) {
+                  echo "、等待退款";
+                }elseif ($row['PackageReturn'] == 0 ) {
+                  echo "";
+                }
+               ?></td>
               <td>
                 <?php
-              if ($row['PackageReturn'] == 0 or $row['PackageReturn'] == 'null' ) {
+              if ($row['PackageReturn'] == 0) {
                 echo "不需退货";
               }elseif ($row['PackageReturn'] == 1) {
-                echo "需要退货";
-              }elseif ($row['PackageReturn'] == 2) {
-                echo "<a href='http://www.google.com/?q=".$row['ReturnTracking']."' target='_blank'>查单</a>";
+                echo "<a href='http://www.google.com/?q=".$row['ReturnTracking']."' target='_blank'>已经退货</a>";
               }
               ?></td>
                 <!-- 计算每单得到的CashBackMoney  -->
@@ -67,7 +77,7 @@ include "connect.php";
                   <ul class="list-inline">
                     <li><a href="order_detail.php?id=<?php echo $row['id']?>" class="btn btn-primary btn-sm">详情<a></li>
                     <li><a href="edit_orders.php?id=<?php echo $row['id']?>" class="btn btn-warning btn-sm">修改</a></li>
-                    <li><a href="del_order.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-xs">删除</a></li>
+                    <li><a href="del_order.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-xs" id="delbutton">删除</a></li>
                   </ul>
               </td>
             </tr>

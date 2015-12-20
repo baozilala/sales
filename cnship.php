@@ -43,7 +43,7 @@ include "connect.php";
               <td>
                   <ul class="list-inline">
                     <li><a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-warning btn-sm">修改</a></li>
-                    <li><a href="del_ship.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-xs">删除</a></li>
+                    <li><a href="del_ship.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-xs" id="delbutton">删除</a></li>
                   </ul>
               </td>
             </tr>

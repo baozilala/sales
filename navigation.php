@@ -13,12 +13,32 @@
       </div>
       <div class="collapse navbar-collapse" id="menu">
         <ul class="nav navbar-nav">
-          <li><a href="add_orders.php">录入订单</a></li>
-          <li><a href="add_ship.php">登记邮寄</a></li>
-          <li><a href="orders.php?p=1">查询订单</a></li>
-          <li><a href="cnship.php?p=1">邮寄跟踪</a></li>
-          <li><a href="customers.php">顾客查询</a></li>
-          <li><a href="sales_status.php">消费统计</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">录入<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="add_orders.php">录入订单</a></li>
+              <li><a href="add_ship.php">登记邮寄</a></li>
+              <li><a href="add_customers.php">添加顾客</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">查询<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="orders.php?p=1">查询订单</a></li>
+              <li><a href="cnship.php?p=1">邮寄跟踪</a></li>
+              <li><a href="customers.php">顾客查询</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">财务<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="sales_status.php">消费统计</a></li>
+            </ul>
+          </li>
+
+
         </ul>
       </div>
     </div>

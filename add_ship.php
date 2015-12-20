@@ -84,7 +84,7 @@ if (!empty($_POST)) {
           </div>
 
           <div class="form-group">
-              <input type="submit" name="name" value="提交">
+              <input type="submit" class="btn btn-default"  name="name" value="提交">
           </div>
         </form>
       </div>

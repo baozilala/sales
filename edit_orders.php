@@ -3,10 +3,6 @@ include "header.php";
 include "navigation.php";
 include "connect.php";
 
-if (!empty($_POST['ReturnTracking'])) {
-  $upda="UPDATE orders SET ReturnTracking='$_POST[ReturnTracking]' WHERE id = $_POST[id]";
-  mysql_query($upda,$con);
-}
 if (!empty($_POST)) {
   $sql = "UPDATE orders SET Name = '$_POST[Name]',
     OrderNumber='$_POST[OrderNumber]',
@@ -20,7 +16,8 @@ if (!empty($_POST)) {
     Bank='$_POST[Bank]',
     BankStatus='$_POST[BankStatus]',
     Notes='$_POST[Notes]',
-    CashBack='$_POST[CashBack]'
+    CashBack='$_POST[CashBack]',
+    ReturnTracking='$_POST[ReturnTracking]'
     WHERE id = $_POST[id];";
 
   if (mysql_query($sql,$con)) {
@@ -46,6 +43,7 @@ if (!empty($_POST)) {
     ";
   }
 }
+if (!empty($_GET)) {
 ?>
 <header class="title page-header text-center">
   <h1>订单修改</h1>
@@ -53,7 +51,7 @@ if (!empty($_POST)) {
 <div class="row">
   <div class="col-sm-12 col-md-2 col-md-offset-5 text-center">
     <?php
-    $Order_List = mysql_query("SELECT * FROM orders WHERE id = $_GET[id]");
+      $Order_List = mysql_query("SELECT * FROM orders WHERE id = $_GET[id]");
     ?>
       <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
       <?php
@@ -121,103 +119,65 @@ if (!empty($_POST)) {
             <div class="form-group">
               <lable>银行状态：</lable>
               <?php
-                if ($row['BankStatus']=='转账中') {
+                if ($row['BankStatus']=='0') {
                   echo "
                   <select class='form-control' name='BankStatus'>
-                    <option value='转账中'>转账中</option>
-                    <option value='已划走'>已经划走</option>
-                    <option value='等待退款'>等待退款</option>
-                    <option value='已退款'>已退款</option>
+                    <option value='0'></option>
+                    <option value='1'>已退款</option>
                   </select>
                   ";
-                }elseif ($row['BankStatus']=='已划走') {
+                }elseif ($row['BankStatus']=='1') {
                   echo "
                   <select class='form-control' name='BankStatus'>
-                    <option value='已划走'>已经划走</option>
-                    <option value='转账中'>转账中</option>
-                    <option value='等待退款'>等待退款</option>
-                    <option value='已退款'>已退款</option>
-                  </select>
-                  ";
-                }elseif ($row['BankStatus']=='等待退款') {
-                  echo "
-                  <select class='form-control' name='BankStatus'>
-                    <option value='等待退款'>等待退款</option>
-                    <option value='已划走'>已经划走</option>
-                    <option value='转账中'>转账中</option>
-                    <option value='已退款'>已退款</option>
-                  </select>
-                  ";
-                }else {
-                  echo "
-                  <select class='form-control' name='BankStatus'>
-                    <option value='已退款'>已退款</option>
-                    <option value='等待退款'>等待退款</option>
-                    <option value='已划走'>已经划走</option>
-                    <option value='转账中'>转账中</option>
+                    <option value='1'>已退款</option>
+                    <option value='0'></option>
                   </select>
                   ";
                 }
 
                ?>
             </div>
+            <div class="form-group">
               <?php
-            if ($row['PackageReturn'] == 'null' ) {
-              echo "<lable>退货：</lable>";
-              echo "
-              <select class='form-control' name='PackageReturn'>
-                <option value=''></option>
-                <option value='0'>不需退货</option>
-                <option value='1'>需要退货</option>
-                <option value='2'>已经退货</option>
-              </select>
-              ";
-            }elseif ($row['PackageReturn'] == 0) {
-              echo "
-              <select class='form-control' name='PackageReturn'>
-                <option value='0'>不需退货</option>
-                <option value=''></option>
-                <option value='1'>需要退货</option>
-                <option value='2'>已经退货</option>
-              </select>
-              ";
-            }elseif ($row['PackageReturn'] == 1) {
-              echo "
-              <select class='form-control' name='PackageReturn'>
-                <option value='1'>需要退货</option>
-                <option value=''></option>
-                <option value='0'>不需退货</option>
-                <option value='2'>已经退货</option>
-              </select>
-              ";
-            }elseif ($row['PackageReturn'] == 2) {
-              echo "
-              <select class='form-control' name='PackageReturn'>
-                <option value='2'>已经退货</option>
-                <option value=''></option>
-                <option value='0'>不需退货</option>
-                <option value='1'>需要退货</option>
-              </select>
-              ";
-
-              echo "
-              <label>Tracking Number</label>
-              <input class='form-control' type='text' name='ReturnTracking' value='". $row['ReturnTracking'] ."' />
-              ";
-
-            }
+                if ($row['PackageReturn'] == 0 ) {
+                  echo "<lable>退货：</lable>";
+                  echo "
+                  <select class='form-control' name='PackageReturn'>
+                    <option value=''></option>
+                    <option value='1'>已经退货</option>
+                  </select>
+                  ";
+                }elseif ($row['PackageReturn'] == 1) {
+                  echo "
+                  <select class='form-control' name='PackageReturn'>
+                    <option value='1'>已经退货</option>
+                    <option value='0'></option>
+                  </select>
+                  ";
+                }
             ?>
+            </div>
+            <div class="form-group">
+              <label>Tracking Number</label>
+              <input class="form-control" type="text "name="ReturnTracking" value="<?php echo $row['ReturnTracking']?>" placeholder="没退不用写。" />
+            </div>
             <div class="form-group">
               <lable>备注</lable>
               <textarea name="Notes" rows="8" cols="40" ><?php echo $row['Notes'] ?></textarea>
             </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-default"  value="submit">
+            </div>
       <?php
-    } ?>
-    <div class="form-group">
-      <input type="submit" value="submit">
-    </div>
+    }
+
+  ?>
+
     </form>
   </div>
 </div>
 
-<?php include "footer.php" ?>
+<?php
+}//这个符号是最上面那个 if !empty get 的
+
+include "footer.php" ?>
